@@ -1,0 +1,33 @@
+{% extends 'main.html' %} {% block content %}
+
+<style>
+  .home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+  }
+</style>
+<div class="home-container">
+  <div>
+    <h3>Filter By Site</h3>
+    <hr />
+    <div>
+      <a href="{% url 'home' %}">All</a>
+    </div>
+    {% for site in sites %}
+    <div>
+      <a href="{% url 'home' %}?q={{site}}">{{site}}</a>
+    </div>
+    {% endfor %}
+  </div>
+  <div>
+    {% for a in articles %}
+    <div>
+      <a href="{% url 'article' a.id %}"><h2>{{a.title}}</h2></a>
+      <h3>{{a.site}}</h3>
+      <span>{{a.date}}</span>
+      <!-- <img src={{a.image}} alt={{a.alt} /> -->
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
