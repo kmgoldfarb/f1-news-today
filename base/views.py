@@ -9,13 +9,13 @@ def home(request):
     articles = Article.objects.filter(
         Q(site__icontains=q) |
         Q(title__icontains=q))
-    sorted_articles = articles.order_by('-date')
+    sorted_articles = articles.order_by('-date')[:50]
     sites = Article.objects.order_by().values_list('site').distinct()
     formatted_sites = []
     for s in sites:
         formatted_sites.append(s[0])
     context =  {'articles': sorted_articles, 'sites': formatted_sites}
-    return render(request, 'base/main.html', context)
+    return render(request, 'base/home.html', context)
 
 
 def article(request, pk):
@@ -25,10 +25,10 @@ def article(request, pk):
 
 
 def standings(request):
-    # get_autosport()
     return render(request, 'base/standings.html')
 
 
 def upcoming(request):
     # get_wtf1()
+    # get_autosport()
     return render(request, 'base/upcoming.html')

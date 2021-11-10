@@ -12,4 +12,23 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
-        
+
+
+class Driver(models.Model):
+    position = models.IntegerField
+    last_name = models.CharField(max_length=100)
+    nationality = models.CharField(max_length=10)
+    team = models.CharField(max_length=100)
+    points = models.IntegerField
+
+    def __str__(self):
+        return self.last_name
+
+
+class Constructor(models.Model):
+    position = models.IntegerField
+    team = models.CharField(max_length=100)
+    points = models.IntegerField
+
+    def __str__(self):
+        return self.team

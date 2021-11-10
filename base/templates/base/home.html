@@ -1,20 +1,41 @@
 {% extends 'main.html' %} {% block content %}
-
 <div class="container-fluid">
   <div class="content">
     <h2 class="title">News</h2>
+    <p class="font-weight-bold">SORT BY SITE:</p>
+    <a href="{% url 'home' %}" class="btn btn-rounded m-10">View All</a>
+    <a href="{% url 'home' %}?q=Autosport" class="btn btn-rounded m-10"
+      >Autosport</a
+    >
+    <a href="{% url 'home' %}?q=PlanetF1" class="btn btn-rounded m-10"
+      >PlanetF1</a
+    >
+    <a href="{% url 'home' %}?q=Racer" class="btn btn-rounded m-10">Racer</a>
+    <a href="{% url 'home' %}?q=RaceFans" class="btn btn-rounded m-10"
+      >RaceFans</a
+    >
+    <a href="{% url 'home' %}?q=RacingNews365" class="btn btn-rounded m-8"
+      >RacingNews365</a
+    >
+    <a href="{% url 'home' %}?q=WTF1" class="btn btn-rounded m-10">WTF1</a>
   </div>
   <div class="row">
     {% for a in articles %}
     <div class="w-350 mw-full">
       <div class="card p-0">
-        <img src="{{a.image}}" class="img-fluid rounded-top" alt="{{a.alt}}" />
+        <a href="{{a.link}}" target="_blank"
+          ><img src="{{a.image}}" class="img-fluid rounded-top" alt="{{a.alt}}"
+        /></a>
         <div class="content">
-          <h2 class="content-title">{{a.title}}</h2>
-          <h5 class="text-muted">{{a.site}}</h5>
-          <p class="text-muted">{{a.date}}</p>
+          <a href="{{a.link}}" target="_blank" class="text-reset"
+            ><h2 class="content-title">{{a.title}}</h2></a
+          >
+          <h5 class="font-italic">{{a.site}}</h5>
+          <h6 class="text-muted">{{a.date}}</h6>
           <div class="text-left">
-            <a href="#" class="btn">Read more</a>
+            <a href="{{a.link}}" class="btn btn-danger btn-lg" target="_blank"
+              >Read article</a
+            >
           </div>
         </div>
       </div>
