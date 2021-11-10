@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class Article(models.Model):
     title = models.CharField(max_length=500)
@@ -15,11 +14,11 @@ class Article(models.Model):
 
 
 class Driver(models.Model):
-    position = models.IntegerField
+    position = models.IntegerField()
     last_name = models.CharField(max_length=100)
     nationality = models.CharField(max_length=10)
     team = models.CharField(max_length=100)
-    points = models.IntegerField
+    points = models.FloatField()
 
     def __str__(self):
         return self.last_name

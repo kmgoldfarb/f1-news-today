@@ -1,9 +1,11 @@
 import datetime
 import requests
 import pprint
+import unicodedata
 from bs4 import BeautifulSoup
 from dateutil import parser
-from .models import Article
+from .models import Article, Driver, Constructor
+
 
 
 def get_autosport():
@@ -60,20 +62,25 @@ def get_driver_standings():
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')    
     driver_standings = soup.find('table', class_="resultsarchive-table")
-
     for driver in driver_standings.find_all('tbody'):
         rows = driver.find_all('tr')
         for row in rows:
-            position = row.find('td', class_="dark").text
+            position = int(row.find('td', class_="dark").text)
+            
             last_name = row.find('span', class_="hide-for-mobile").text
+            formatted_name = unicodedata.normalize('NFD', last_name)
+            
             nationality = row.find('td', class_="dark semi-bold uppercase").text
             team = row.find('a', class_="grey semi-bold uppercase ArchiveLink").text
-            points = row.find('td', class_="dark bold").text
-            d = {
-                "position": position,
-                "last_name": last_name,
-                "nationality": nationality,
-                "team": team,
-                "points": points
-            }
+            points = float(row.find('td', class_="dark bold").text)
+            d = Driver.objects.update_or_create(
+                position = position,
+                last_name = formatted_name,
+                nationality = nationality,
+                team = team,
+                points = points,
+                defaults={"position": position, "points": points}
+            )
             pprint.pprint(d)
+
+
