@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Q
-from .models import Article, Driver
-from .scrapers import get_autosport, get_wtf1, get_driver_standings
+from .models import Article, Constructor, Driver, Race
+from .scrapers import get_autosport, get_wtf1, get_driver_standings, get_constructor_standings, get_upcoming_races
 
 
 def home(request):
@@ -26,12 +26,13 @@ def article(request, pk):
 
 def standings(request):
     drivers = Driver.objects.all().order_by('position')
-    context = {'drivers': drivers}
+    teams = Constructor.objects.all().order_by('position')
+    context = {'drivers': drivers, "teams": teams}
     return render(request, 'base/standings.html', context)
 
 
 def upcoming(request):
-    # get_wtf1()
-    # get_autosport()
     get_driver_standings()
-    return render(request, 'base/upcoming.html')
+    races = Race.objects.all().order_by('-date')
+    context = {'races': races}
+    return render(request, 'base/upcoming.html', context)

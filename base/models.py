@@ -25,9 +25,21 @@ class Driver(models.Model):
 
 
 class Constructor(models.Model):
-    position = models.IntegerField
+    position = models.IntegerField()
     team = models.CharField(max_length=100)
-    points = models.IntegerField
+    points = models.FloatField()
 
     def __str__(self):
         return self.team
+
+
+class Race(models.Model):
+    title = models.CharField(max_length=300)
+    date = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
+    flag = models.CharField(max_length=500)
+    track_img = models.CharField(max_length=500)
+    link = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.title

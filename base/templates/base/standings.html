@@ -1,22 +1,57 @@
 {% extends 'main.html' %} {% block content %}
-<div class="container-fluid">
+<div class="container">
   <div class="content">
     <h2 class="title">Standings</h2>
   </div>
   <div class="content">
-    <h4 class="title">Driver Standings</h2>
-    {% for d in drivers %}
-    <tr>
-        <td>{{d.position}}</td>
-        <td>{{d.last_name}}</td>
-        <td>{{d.team}}</td>
-        <td>{{d.points}}</td>
-        <td>{{d.nationality}}</td>
-    </tr>
-    {% endfor %}
+    <h4 class="title">Driver Standings</h4>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Team</th>
+            <th>Nationality</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for d in drivers %}
+          <tr>
+            <td class="font-weight-bold">{{d.position}}</td>
+            <td>{{d.last_name}}</td>
+            <td>{{d.points}}</td>
+            <td>{{d.team}}</td>
+            <td>{{d.nationality}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="content">
     <h4 class="title">Constructor Standings</h4>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Team</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in teams %}
+          <tr>
+            <td class="font-weight-bold">{{t.position}}</td>
+            <td>{{t.team}}</td>
+            <td>{{t.points}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 {% endblock %}

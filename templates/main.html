@@ -73,14 +73,8 @@
               aria-labelledby="navbar-dropdown-toggle-btn-1"
             >
               <!-- w-200 = width: 20rem (200px) -->
-              <div class="dropdown-header">Filter by site</div>
-              <a href="{% url 'home' %}" class="dropdown-item">All</a>
-              {% for site in sites %}
-              <a href="{% url 'home' %}?q={{site}}" class="dropdown-item"
-                >{{site}}</a
-              >
-              {% endfor %}
               <div class="dropdown-header">Pages</div>
+              <a href="/" class="dropdown-item">News</a>
               <a href="/standings" class="dropdown-item">Standings</a>
               <a href="/upcoming" class="dropdown-item">Upcoming</a>
             <div class="dropdown-content">
