@@ -4,18 +4,30 @@
     <h2 class="title">Upcoming Races</h2>
   </div>
   <div class="row">
-    {% for r in races %}
+    {% if races %} {% for r in races %}
     <div class="w-350 mw-full">
       <div class="card text-center p-0">
         <div class="content">
-          <img class="img-fluid rounded border" src="{{r.flag}}" />
-          <a href="{{r.link}}" target="_blank"><h4>{{r.title}}</h4></a>
-          <h5>{{r.country}} | {{r.date}}</h5>
-          <img class="img-fluid rounded" src="{{r.track_img}}" />
+          <a href="{{r.link}}" target="_blank"
+            ><img class="img-fluid rounded border mb-10" src="{{r.flag}}"
+          /></a>
+          <a href="{{r.link}}" target="_blank" class="text-reset"
+            ><h2 class="content-title">{{r.title}}</h2></a
+          >
+          <h5 class="font-weight-bold text-muted">
+            {{r.country}} | {{r.date}}
+          </h5>
+          <a href="{{r.link}}" target="_blank"
+            ><img class="img-fluid rounded" src="{{r.track_img}}"
+          /></a>
         </div>
       </div>
     </div>
-    {% endfor %}
+    {% endfor %} {% else %}
+    <div class="content">
+      <h4>No upcoming races. See you next season!</h4>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

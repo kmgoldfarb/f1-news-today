@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Q
 from .models import Article, Constructor, Driver, Race
-from .scrapers import get_autosport, get_wtf1, get_driver_standings, get_constructor_standings, get_upcoming_races
+from .scrapers import get_autosport, get_sky_sports, get_wtf1, get_driver_standings, get_constructor_standings, get_upcoming_races
 
 
 def home(request):

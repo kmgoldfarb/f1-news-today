@@ -33,6 +33,27 @@ def get_autosport():
         print('Executed successfully')
 
 
+def get_sky_sports():
+    res = requests.get('https://www.skysports.com/f1/news')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    articles = soup.find_all('div', class_='news-list__item')
+    for item in articles:
+        link = item.a['href'].strip()
+        title = item.find(class_="news-list__headline-link").text.strip()
+        img = item.img['data-src']
+        alt = item.find(class_="news-list__headline-link").text.strip()
+        eu_date = item.find('span', class_='label__timestamp').text
+        date_obj = datetime.datetime.strptime(eu_date, "%d/%m/%y %I:%M%p")
+        a = Article.objects.update_or_create(
+            link = link,
+            title = title,
+            image = img,
+            alt = alt,
+            date = datetime.datetime.strftime(date_obj, "%B %d %Y, %H:%M"),
+            site = "Sky Sports"
+        )
+        pprint.pprint(a)
+
 def get_wtf1():
     res = requests.get('https://wtf1.com/topics/formula-1/')
     soup = BeautifulSoup(res.text, 'html.parser')
@@ -66,13 +87,15 @@ def get_driver_standings():
         rows = driver.find_all('tr')
         for row in rows:
             position = int(row.find('td', class_="dark").text)
+            first_name = row.find('span', class_="hide-for-tablet").text
             last_name = row.find('span', class_="hide-for-mobile").text
+            name = f"{first_name} {last_name}"
             nationality = row.find('td', class_="dark semi-bold uppercase").text
             team = row.find('a', class_="grey semi-bold uppercase ArchiveLink").text
             points = float(row.find('td', class_="dark bold").text)
             d = Driver.objects.update_or_create(
                 position = position,
-                last_name = last_name,
+                name = name,
                 nationality = nationality,
                 team = team,
                 points = points,

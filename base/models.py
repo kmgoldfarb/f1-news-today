@@ -15,13 +15,13 @@ class Article(models.Model):
 
 class Driver(models.Model):
     position = models.IntegerField()
-    last_name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     nationality = models.CharField(max_length=10)
     team = models.CharField(max_length=100)
     points = models.FloatField()
 
     def __str__(self):
-        return self.last_name
+        return self.name
 
 
 class Constructor(models.Model):
