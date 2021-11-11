@@ -40,6 +40,7 @@ class Race(models.Model):
     flag = models.CharField(max_length=500)
     track_img = models.CharField(max_length=500)
     link = models.CharField(max_length=500)
+    time = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title

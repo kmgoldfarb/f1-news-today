@@ -32,7 +32,6 @@ def standings(request):
 
 
 def upcoming(request):
-    get_driver_standings()
-    races = Race.objects.all().order_by('-date')
+    races = Race.objects.all().order_by('id')
     context = {'races': races}
     return render(request, 'base/upcoming.html', context)

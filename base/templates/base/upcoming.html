@@ -1,19 +1,21 @@
 {% extends 'main.html' %} {% block content %}
-<div class="container">
+<div class="container-fluid">
   <div class="content">
     <h2 class="title">Upcoming Races</h2>
   </div>
-  {% for r in races %}
-  <div class="container-fluid">
-    <div class="card">
-      <a href="{{r.link}}" target="_blank"
-        ><h3 class="title">{{r.title}}</h3></a
-      >
-      <h5>{{r.country}} | {{r.date}}</h5>
-      <img class="img-fluid rounded border" src="{{r.flag}}" />
-      <img class="img-fluid rounded border" src="{{r.track_img}}" />
+  <div class="row">
+    {% for r in races %}
+    <div class="w-350 mw-full">
+      <div class="card text-center p-0">
+        <div class="content">
+          <img class="img-fluid rounded border" src="{{r.flag}}" />
+          <a href="{{r.link}}" target="_blank"><h4>{{r.title}}</h4></a>
+          <h5>{{r.country}} | {{r.date}}</h5>
+          <img class="img-fluid rounded" src="{{r.track_img}}" />
+        </div>
+      </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 {% endblock %}
