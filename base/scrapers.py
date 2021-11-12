@@ -27,7 +27,6 @@ def get_autosport():
             site = "Autosport",
             defaults={'link': link}
         )
-    print('Executed Autosport')
 
 
 def get_planet_f1():
@@ -52,7 +51,6 @@ def get_planet_f1():
             site = "PlanetF1",
             defaults={'link': link, 'image': image}
         )
-    print('Executed PlanetF1')
 
 
 def get_racer():
@@ -76,7 +74,6 @@ def get_racer():
             site = "Racer",
             defaults={'link': link}
         )
-    print('Executed Racer')
 
 
 def get_racefans():
@@ -104,7 +101,6 @@ def get_racefans():
             site = "RaceFans",
             defaults={'link': link}
         )
-    print('Executed RaceFans')
 
 
 def get_racingnews365():
@@ -128,7 +124,6 @@ def get_racingnews365():
             site = "RacingNews365",
             defaults={'link': link}
         )
-    print('Executed RacingNews365')
 
 
 def get_sky_sports():
@@ -151,7 +146,6 @@ def get_sky_sports():
             site = "Sky Sports",
             defaults={'link': link}
         )
-    print('Executed Sky Sports')
 
 
 def get_wtf1():
@@ -176,7 +170,6 @@ def get_wtf1():
             site = "WTF1",
             defaults={'link': link}
         )
-    print('Executed WTF1')
 
 
 def get_driver_standings():
@@ -202,7 +195,6 @@ def get_driver_standings():
                 points = points,
                 defaults={"position": position, "points": points}
             )
-    print('Executed Driver Standings')
 
 
 def get_constructor_standings():
@@ -222,7 +214,6 @@ def get_constructor_standings():
                 points = points,
                 defaults={"position": position, "points": points}
             )
-    print('Executed Constructor Standings')
 
 
 def get_upcoming_races():
@@ -254,4 +245,3 @@ def get_upcoming_races():
             time = datetime.datetime.strftime(formatted_date, "%B %d %Y"),
             defaults={"title": title}
         )
-    print('Executed Upcoming Races')
