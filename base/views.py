@@ -14,6 +14,7 @@ def home(request):
     formatted_sites = []
     for s in sites:
         formatted_sites.append(s[0])
+    formatted_sites.sort()
     context =  {'articles': sorted_articles, 'sites': formatted_sites}
     return render(request, 'base/home.html', context)
 

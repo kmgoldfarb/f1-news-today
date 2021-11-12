@@ -3,24 +3,53 @@
   <div class="content">
     <h2 class="title">News</h2>
     <p class="font-weight-bold">SORT BY SITE:</p>
-    <a href="{% url 'home' %}" class="btn btn-rounded m-10">View All</a>
-    <a href="{% url 'home' %}?q=Autosport" class="btn btn-rounded m-10"
-      >Autosport</a
-    >
-    <a href="{% url 'home' %}?q=PlanetF1" class="btn btn-rounded m-10"
-      >PlanetF1</a
-    >
-    <a href="{% url 'home' %}?q=Racer" class="btn btn-rounded m-10">Racer</a>
-    <a href="{% url 'home' %}?q=RaceFans" class="btn btn-rounded m-10"
-      >RaceFans</a
-    >
-    <a href="{% url 'home' %}?q=RacingNews365" class="btn btn-rounded m-8"
-      >RacingNews365</a
-    >
-    <a href="{% url 'home' %}?q=Sky%20Sports" class="btn btn-rounded m-8"
-      >Sky Sports</a
-    >
-    <a href="{% url 'home' %}?q=WTF1" class="btn btn-rounded m-10">WTF1</a>
+    <div class="d-inline">
+      <a href="{% url 'home' %}" class="btn btn-rounded font-weight-semi-bold"
+        >View All</a
+      >
+      {% for s in sites %}
+      <a
+        href="{% url 'home' %}?q={{s}}"
+        class="btn btn-rounded font-weight-semi-bold m-5"
+        >{{s}}</a
+      >
+      {% endfor %}
+      <!--  <a
+        href="{% url 'home' %}?q=Autosport"
+        class="btn btn-rounded font-weight-semi-bold"
+        >Autosport</a
+      >
+      <a
+        href="{% url 'home' %}?q=PlanetF1"
+        class="btn btn-rounded font-weight-semi-bold"
+        >PlanetF1</a
+      >
+      <a
+        href="{% url 'home' %}?q=Racer"
+        class="btn btn-rounded font-weight-semi-bold"
+        >Racer</a
+      >
+      <a
+        href="{% url 'home' %}?q=RaceFans"
+        class="btn btn-rounded font-weight-semi-bold"
+        >RaceFans</a
+      >
+      <a
+        href="{% url 'home' %}?q=RacingNews365"
+        class="btn btn-rounded font-weight-semi-bold"
+        >RacingNews365</a
+      >
+      <a
+        href="{% url 'home' %}?q=Sky%20Sports"
+        class="btn btn-rounded font-weight-semi-bold"
+        >Sky Sports</a
+      >
+      <a
+        href="{% url 'home' %}?q=WTF1"
+        class="btn btn-rounded font-weight-semi-bold"
+        >WTF1</a
+      > -->
+    </div>
   </div>
   <div class="row">
     {% for a in articles %}

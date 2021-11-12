@@ -1,11 +1,8 @@
 import datetime
 import requests
-import pprint
-from unidecode import unidecode
 from bs4 import BeautifulSoup
 from dateutil import parser
 from .models import Article, Driver, Constructor, Race
-
 
 
 def get_autosport():
@@ -26,11 +23,105 @@ def get_autosport():
             title = title,
             image = img,
             alt = alt,
-            date = datetime.datetime.strftime(formatted_date, "%B %d, %Y %H:%M"),
+            date = datetime.datetime.strftime(formatted_date, "%B %d, %Y | %H:%M"),
             site = "Autosport",
             defaults={'link': link}
         )
-        print('Executed successfully')
+    print('Executed Autosport')
+
+
+def get_planet_f1():
+    res = requests.get('https://www.planetf1.com/news/')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    articles = soup.find(class_="articleList__list").find_all(class_="articleList__item")
+    now = datetime.datetime.now()
+    for item in articles:
+        link = item.a['href']
+        title = item.h3.text
+        img = item.img['data-src']
+        alt = item.img['alt']
+        date = item.time['datetime']
+        formatted_date = parser.parse(date)
+        a = Article.objects.update_or_create(
+            link = link,
+            title = title,
+            image = img,
+            alt = alt,
+            date = datetime.datetime.strftime(formatted_date, "%B %d, %Y | %H:%M"),
+            site = "PlanetF1",
+            defaults={'link': link}
+        )
+    print('Executed PlanetF1')
+
+
+def get_racer():
+    res = requests.get('https://racer.com/category/f1/')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    main = soup.find(class_='column big category-page')
+    articles = main.find_all('article', class_="block big")
+    for item in articles:
+        link = item.a['href']
+        title = item.find(class_="content").h3.a.text.strip()
+        img = item.img['src']
+        alt = item.img['alt']
+        date = item.find(class_="time").text
+        formatted_date = parser.parse(date)
+        a = Article.objects.update_or_create(
+            link = link,
+            title = title,
+            image = img,
+            alt = alt,
+            date = datetime.datetime.strftime(formatted_date, "%B %d, %Y | %H:%M"),
+            site = "Racer",
+            defaults={'link': link}
+        )
+    print('Executed Racer')
+
+
+def get_racefans():
+    res = requests.get('https://www.racefans.net/')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    articles = soup.find_all('article')
+    now = datetime.datetime.now()
+    for item in articles:
+        link = item.a['href']
+        title = item.h2.text
+        img = item.img['src']
+        alt = item.img['alt']
+        a = Article.objects.update_or_create(
+            link = link,
+            title = title,
+            image = img,
+            alt = alt,
+            date = now.strftime("%B %d, %Y | %H:%M"),
+            site = "RaceFans",
+            defaults={'link': link}
+        )
+    print('Executed RaceFans')
+
+
+def get_racingnews365():
+    res = requests.get('https://racingnews365.com/f1-news')
+    soup = BeautifulSoup(res.text, 'html.parser')
+    main = soup.find(class_="content-grid__main")
+    articles = main.find_all(class_="card--default")
+    for item in articles:
+        link = item['href']
+        title = item.find(class_="card__title").text
+        img = item.img['src']
+        alt = item.find(class_="card__title").text
+        date = item.time['datetime']
+        formatted_date = parser.parse(date)
+        a = Article.objects.update_or_create(
+            link = link,
+            title = title,
+            image = img,
+            alt = alt,
+            date = datetime.datetime.strftime(formatted_date, "%B %d, %Y | %H:%M"),
+            site = "RacingNews365",
+            defaults={'link': link}
+        )
+    print('Executed RacingNews365')
 
 
 def get_sky_sports():
@@ -49,10 +140,12 @@ def get_sky_sports():
             title = title,
             image = img,
             alt = alt,
-            date = datetime.datetime.strftime(date_obj, "%B %d %Y, %H:%M"),
-            site = "Sky Sports"
+            date = datetime.datetime.strftime(date_obj, "%B %d, %Y | %H:%M"),
+            site = "Sky Sports",
+            defaults={'link': link}
         )
-        pprint.pprint(a)
+    print('Executed Sky Sports')
+
 
 def get_wtf1():
     res = requests.get('https://wtf1.com/topics/formula-1/')
@@ -72,11 +165,12 @@ def get_wtf1():
             title = title,
             image = img,
             alt = alt,
-            date = datetime.datetime.strftime(formatted_date, "%B %d %Y, %H:%M"),
+            date = datetime.datetime.strftime(formatted_date, "%B %d, %Y | %H:%M"),
             site = "WTF1",
             defaults={'link': link}
         )
-        print('Executed successfully')
+    print('Executed WTF1')
+
 
 def get_driver_standings():
     url = 'https://www.formula1.com/en/results.html/2021/drivers.html'
@@ -101,7 +195,7 @@ def get_driver_standings():
                 points = points,
                 defaults={"position": position, "points": points}
             )
-            pprint.pprint(d)
+    print('Executed Driver Standings')
 
 
 def get_constructor_standings():
@@ -121,7 +215,7 @@ def get_constructor_standings():
                 points = points,
                 defaults={"position": position, "points": points}
             )
-            pprint.pprint(c)
+    print('Executed Constructor Standings')
 
 
 def get_upcoming_races():
@@ -153,3 +247,4 @@ def get_upcoming_races():
             time = datetime.datetime.strftime(formatted_date, "%B %d %Y"),
             defaults={"title": title}
         )
+    print('Executed Upcoming Races')
