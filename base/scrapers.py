@@ -38,18 +38,19 @@ def get_planet_f1():
     for item in articles:
         link = item.a['href']
         title = item.h3.text
-        img = item.img['data-src']
+        img = item.img['data-src'][:-11]
+        image = img + '1200x630.jpg'
         alt = item.img['alt']
         date = item.time['datetime']
         formatted_date = parser.parse(date)
         a = Article.objects.update_or_create(
             link = link,
             title = title,
-            image = img,
+            image = image,
             alt = alt,
             date = datetime.datetime.strftime(formatted_date, "%B %d, %Y | %H:%M"),
             site = "PlanetF1",
-            defaults={'link': link}
+            defaults={'link': link, 'image': image}
         )
     print('Executed PlanetF1')
 
@@ -82,18 +83,24 @@ def get_racefans():
     res = requests.get('https://www.racefans.net/')
     soup = BeautifulSoup(res.text, 'html.parser')
     articles = soup.find_all('article')
-    now = datetime.datetime.now()
     for item in articles:
         link = item.a['href']
         title = item.h2.text
-        img = item.img['src']
+        img = item.img['srcset'].split(",")[2].strip()[:-4]
         alt = item.img['alt']
+
+        # Need to go onto article page to get date and time
+        res2 = requests.get(link)
+        soup2 = BeautifulSoup(res2.text, 'html.parser')
+        date = soup2.find('time')['datetime']
+        formatted_date = parser.parse(date)
+
         a = Article.objects.update_or_create(
             link = link,
             title = title,
             image = img,
             alt = alt,
-            date = now.strftime("%B %d, %Y | %H:%M"),
+            date = datetime.datetime.strftime(formatted_date, "%B %d, %Y | %H:%M"),
             site = "RaceFans",
             defaults={'link': link}
         )

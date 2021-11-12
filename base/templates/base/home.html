@@ -14,49 +14,17 @@
         >{{s}}</a
       >
       {% endfor %}
-      <!--  <a
-        href="{% url 'home' %}?q=Autosport"
-        class="btn btn-rounded font-weight-semi-bold"
-        >Autosport</a
-      >
-      <a
-        href="{% url 'home' %}?q=PlanetF1"
-        class="btn btn-rounded font-weight-semi-bold"
-        >PlanetF1</a
-      >
-      <a
-        href="{% url 'home' %}?q=Racer"
-        class="btn btn-rounded font-weight-semi-bold"
-        >Racer</a
-      >
-      <a
-        href="{% url 'home' %}?q=RaceFans"
-        class="btn btn-rounded font-weight-semi-bold"
-        >RaceFans</a
-      >
-      <a
-        href="{% url 'home' %}?q=RacingNews365"
-        class="btn btn-rounded font-weight-semi-bold"
-        >RacingNews365</a
-      >
-      <a
-        href="{% url 'home' %}?q=Sky%20Sports"
-        class="btn btn-rounded font-weight-semi-bold"
-        >Sky Sports</a
-      >
-      <a
-        href="{% url 'home' %}?q=WTF1"
-        class="btn btn-rounded font-weight-semi-bold"
-        >WTF1</a
-      > -->
     </div>
   </div>
   <div class="row">
-    {% for a in articles %}
+    {% if articles %} {% for a in articles %}
     <div class="w-350 mw-full">
       <div class="card p-0">
         <a href="{{a.link}}" target="_blank"
-          ><img src="{{a.image}}" class="img-fluid rounded-top" alt="{{a.alt}}"
+          ><img
+            src="{{a.image}}"
+            class="img-fluid rounded-top w-full"
+            alt="{{a.alt}}"
         /></a>
         <div class="content">
           <a href="{{a.link}}" target="_blank" class="text-reset"
@@ -72,7 +40,11 @@
         </div>
       </div>
     </div>
-    {% endfor %}
+    {% endfor %} {% else %}
+    <div class="content">
+      <h4 class="text-center">Error loading articles. Check back later.</h4>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

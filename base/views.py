@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Q
 from .models import Article, Constructor, Driver, Race
-from .scrapers import get_autosport, get_sky_sports, get_wtf1, get_driver_standings, get_constructor_standings, get_upcoming_races
 
 
 def home(request):
@@ -9,7 +8,7 @@ def home(request):
     articles = Article.objects.filter(
         Q(site__icontains=q) |
         Q(title__icontains=q))
-    sorted_articles = articles.order_by('-date')[:50]
+    sorted_articles = articles.order_by('-date')[:64]
     sites = Article.objects.order_by().values_list('site').distinct()
     formatted_sites = []
     for s in sites:

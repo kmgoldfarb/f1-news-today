@@ -78,8 +78,13 @@ WSGI_APPLICATION = 'f1news.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'F1NewsToday',
+        'USER': 'postgres',
+        'PASSWORD': 'VamosUnited96',
+        'HOST': 'localhost',
+        'PORT': '5432'
+
     }
 }
 

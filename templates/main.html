@@ -8,12 +8,9 @@
       name="viewport"
     />
     <meta name="viewport" content="width=device-width" />
-
-    <!-- Favicon and title -->
-    <link rel="icon" href="path/to/fav.png" />
+    <link rel="icon" href="../static/images/favicon.ico" />
     <title>F1 News Today</title>
-
-    <!-- Halfmoon CSS -->
+    <meta name="description" content="Find F1 news from around the internet in one place." />
     <link
       href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css"
       rel="stylesheet"
@@ -25,14 +22,10 @@
     data-sidebar-shortcut-enabled="true"
     data-set-preferred-mode-onload="true"
   >
-    <!-- Page wrapper start -->
     <div class="page-wrapper with-navbar">
-      <!-- Navbar start -->
       <nav class="navbar">
-        <!-- Reference: https://www.gethalfmoon.com/docs/navbar -->
         <a class="navbar-brand" href="/"> F1 News Today </a>
         <ul class="navbar-nav d-none d-md-flex">
-          <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px) -->
           <li class="nav-item">
             <a href="/" class="nav-link">News</a>
           </li>
@@ -48,7 +41,6 @@
           method="GET"
           action="{% url 'home' %}"
         >
-          <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
           <input
             type="text"
             class="form-control"
@@ -64,7 +56,6 @@
                 Switch Theme
               </button>
         <div class="navbar-content d-md-none ml-auto">
-          <!-- d-md-none = display: none on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
           <div class="dropdown with-arrow">
             <button
               class="btn"
@@ -79,7 +70,6 @@
               class="dropdown-menu dropdown-menu-right w-200"
               aria-labelledby="navbar-dropdown-toggle-btn-1"
             >
-              <!-- w-200 = width: 20rem (200px) -->
               <div class="dropdown-header">Pages</div>
               <a href="/" class="dropdown-item">News</a>
               <a href="/standings" class="dropdown-item">Standings</a>
@@ -108,13 +98,8 @@
           </div>
         </div>
       </nav>
-      <!-- Navbar end -->
-      <!-- Content wrapper start -->
       <div class="content-wrapper">{% block content %} {% endblock %}</div>
-      <!-- Content wrapper end -->
     </div>
-    <!-- Page wrapper end -->
-    <!-- Halfmoon JS -->
     <script src="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js"></script>
   </body>
 </html>
