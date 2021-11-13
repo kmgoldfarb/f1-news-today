@@ -16,9 +16,9 @@
       {% endfor %}
     </div>
   </div>
-  <div class="row">
+  <div class="row row-eq-spacing">
     {% if articles %} {% for a in articles %}
-    <div class="w-325 mw-full">
+    <div class="w-300 mw-full">
       <div class="card p-0">
         <a href="{{a.link}}" target="_blank"
           ><img
@@ -28,7 +28,7 @@
         /></a>
         <div class="content">
           <a href="{{a.link}}" target="_blank" class="text-reset"
-            ><h2 class="content-title">{{a.title}}</h2></a
+            ><h2 class="font-size-18 font-weight-semi-bold">{{a.title}}</h2></a
           >
           <h5 class="font-italic">{{a.site}}</h5>
           <h6 class="text-muted">{{a.date}}</h6>
