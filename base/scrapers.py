@@ -188,11 +188,9 @@ def get_driver_standings():
             team = row.find('a', class_="grey semi-bold uppercase ArchiveLink").text
             points = float(row.find('td', class_="dark bold").text)
             d = Driver.objects.update_or_create(
-                position = position,
                 name = name,
                 nationality = nationality,
                 team = team,
-                points = points,
                 defaults={"position": position, "points": points}
             )
 
@@ -209,9 +207,7 @@ def get_constructor_standings():
             team = constructor.find('a', class_="dark bold uppercase ArchiveLink").text
             points = float(constructor.find('td', class_="dark bold").text)
             c = Constructor.objects.update_or_create(
-                position = position,
                 team = team,
-                points = points,
                 defaults={"position": position, "points": points}
             )
 
