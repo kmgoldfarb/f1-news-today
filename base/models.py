@@ -3,7 +3,7 @@ from django.db import models
 
 class Article(models.Model):
     title = models.CharField(max_length=500)
-    link = models.CharField(max_length=500)
+    link = models.CharField(max_length=500, unique=True)
     image = models.CharField(max_length=1000)
     alt = models.CharField(max_length=500, default="")
     site = models.CharField(max_length=500)
