@@ -33,6 +33,7 @@ ALLOWED_HOSTS = os.getenv(
     "127.0.0.1,localhost,f-1-news-today-btct9.ondigitalocean.app",
 ).split(",")
 
+DISABLE_COLLECTSTATIC = 1
 
 # Application definition
 
