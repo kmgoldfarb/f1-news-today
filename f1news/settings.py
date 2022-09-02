@@ -14,8 +14,6 @@ from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 import os
 from urllib.parse import urlparse
-import sys
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,9 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
-
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+DEBUG = os.getenv("DEBUG", "False")
 
 ALLOWED_HOSTS = os.getenv(
     "DJANGO_ALLOWED_HOSTS",
@@ -80,18 +76,29 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "f1news.wsgi.application"
 
-if DEVELOPMENT_MODE is True:
+if os.getenv("DATABASE_URL", "") != "":
+    r = urlparse(os.environ.get("DATABASE_URL"))
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": os.path.relpath(r.path, "/"),
+            "USER": r.username,
+            "PASSWORD": r.password,
+            "HOST": r.hostname,
+            "PORT": r.port,
+            "OPTIONS": {"sslmode": "require"},
         }
     }
-elif len(sys.argv) > 0 and sys.argv[1] != "collectstatic":
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
+else:
     DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "F1NewsToday",
+            "USER": "postgres",
+            "PASSWORD": "VamosUnited96",
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
     }
 
 
