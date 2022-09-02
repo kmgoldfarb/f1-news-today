@@ -30,7 +30,7 @@ DEBUG = os.getenv("DEBUG", "False")
 
 ALLOWED_HOSTS = os.getenv(
     "DJANGO_ALLOWED_HOSTS",
-    "127.0.0.1,localhost,seashell-app-t3bsw.ondigitalocean.app, f1news.today",
+    "127.0.0.1,localhost,seashell-app-t3bsw.ondigitalocean.app, f1news.today, www.f1news.today",
 ).split(",")
 
 
