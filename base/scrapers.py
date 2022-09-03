@@ -212,7 +212,7 @@ def get_upcoming_races():
         flag = sources[0]["data-srcset"].split(",")[0]
         track_img = sources[1]["data-srcset"].split(",")[0]
         country_link = country.strip().replace(" ", "_")
-        link = f"en/racing/2021/{country_link}.html"
+        link = f"en/racing/{year}/{country_link}.html"
         formatted_date = parser.parse(start_date)
         r = Race.objects.update_or_create(
             title=title,
